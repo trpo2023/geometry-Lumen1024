@@ -28,7 +28,19 @@ struct Circle
     string initLine;
 };
 
-enum LineStatus checkLine(string line){
+
+// bool checkFloatNuber(string strNumber){
+//     size_t point = strNumber.find(".");
+//     size_t pointR = strNumber.rfind(".");
+
+//     if (point == string::npos) return false;
+//     if (point != pointR) return false;
+//     if (point == 0 || point == strNumber.length()-1) return false;
+
+//     return true;
+// }
+
+LineStatus checkLine(string line){
     size_t namepos = line.find("circle");
     if (namepos != 0)
         return nameException;
@@ -41,23 +53,25 @@ enum LineStatus checkLine(string line){
     if (leftb >= rightb) return bracketsException;
 
     size_t leftSpace = line.find(" ");
-    size_t rightSpace = line.find(" ");
+    size_t rightSpace = line.rfind(" ");
     size_t zap = line.find(",");
 
     if (leftSpace == string::npos) return inBracketsIncorrectException;
     if (rightSpace == string::npos) return inBracketsIncorrectException;
     if (zap == string::npos) return inBracketsIncorrectException;
     
-    try
-    {
-        stof(line.substr(leftb+1, leftSpace-leftb));
-        stof(line.substr(leftSpace+1, leftSpace-zap));
-        stof(line.substr(rightSpace+1, rightb-rightSpace));
-    }
-    catch(const std::exception& e)
-    {
-        return inBracketsIncorrectException;
-    }
+    size_t endSb = 0;
+
+    stof(line.substr(leftb+1, leftSpace-leftb), &endSb);
+    if (endSb != leftSpace-leftb-1) return inBracketsIncorrectException;
+
+    stof(line.substr(leftSpace+1, zap-leftSpace), &endSb);
+    if (endSb != zap-leftSpace-1) return inBracketsIncorrectException;
+
+    stof(line.substr(rightSpace+1, rightb-rightSpace), &endSb);
+    if (endSb != rightb-rightSpace-1) return inBracketsIncorrectException;
+
+
     return fine;
 }
 
