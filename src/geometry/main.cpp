@@ -10,12 +10,12 @@
 #include "../libgeometry/headers/LineStatus.h"
 
 using namespace std;
+
 int main()
 {
     list<Circle> figures;
     ifstream file("input.wkt");
     string line;
-    cout << "work!" << endl;
     int currentFigureId = 0;
     bool incorrectInput = false;
     while (getline(file, line))
