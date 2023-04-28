@@ -73,7 +73,7 @@ $(PATH_OBJ_TEST)%.o : $(PATH_TEST)%.cpp
 # -----------------------------------------------------------------------
 
 clear :
-	rm $(OBJ_MAIN) $(OBJ_TEST) \
+	rm -f $(OBJ_MAIN) $(OBJ_TEST) \
 	$(PATH_BIN_TARGET)$(TARGET) $(PATH_BIN_TEST)$(TARGET_TEST) \
 	$(OBJ_LIB) $(STAT_LIB)
 
