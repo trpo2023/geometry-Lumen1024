@@ -45,12 +45,17 @@ test : $(PATH_BIN_TEST)$(TARGET_TEST)
 all : $(PATH_BIN_TARGET)$(TARGET)
 
 # final
-$(PATH_BIN_TARGET)$(TARGET) : $(STAT_LIB) $(OBJ_MAIN)
+$(PATH_BIN_TARGET)$(TARGET) : $(PATH_BIN_TARGET) $(STAT_LIB) $(OBJ_MAIN)
 	$(CC) $(STAT_LIB) $(OBJ_MAIN) -o $(PATH_BIN_TARGET)$(TARGET)
 
+$(PATH_BIN_TARGET):
+	mkdir -p $(PATH_BIN_TARGET)
 # test
-$(PATH_BIN_TEST)$(TARGET_TEST) : $(STAT_LIB) $(OBJ_TEST)
+$(PATH_BIN_TEST)$(TARGET_TEST) : $(PATH_BIN_TEST) $(STAT_LIB) $(OBJ_TEST)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(STAT_LIB) $(OBJ_TEST) -o $(PATH_BIN_TEST)$(TARGET_TEST)
+
+$(PATH_BIN_TEST):
+	mkdir -p $(PATH_BIN_TARGET)
 
 # -----------------------------------------------------------------------
 
